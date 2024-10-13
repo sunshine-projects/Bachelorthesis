@@ -306,24 +306,3 @@ def gcp(df, dfa, p_done):
 #########################################################################################
 
 
-
-
-
-
-dfx,datainfo = data_processing.new()
-set_df_with_info(dfx,datainfo)
-values = [60,70]
-partitioning = ['strict','relaxed']
-algorithm = ['u-mondrian']
-for value in values:
-    for parti in partitioning:
-        for algo in algorithm:
-            set_k(value)
-            # can be add print statement to follow the anonymization prozess, as this might take long
-            # print('adult',value,parti,algo)
-            if algo == 'mondrian':
-                result = mondrian(df,parti)
-            else:
-                result = u_mondrian(df,parti)
-            print('done')
-            export_df(result,'imports_'+ algo +'_'+parti+'_'+str(value))

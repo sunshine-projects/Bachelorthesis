@@ -186,23 +186,3 @@ def credit():
     df.to_csv('cleaned_credit.csv')
     return (df,info)
 
-def new():
-    global file_path, names_attributes, categorical_attributes,numerical_attributes,qid_attributes,sensitive_attributes, missing_symbol
-    file_path = os.path.join(current_directory, 'imports-85.data')
-    names_attributes=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
-           'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    df = pd.read_csv(file_path, header = None, names = names_attributes, index_col = False, engine = 'python')
-    names_attributes = df.columns.tolist()
-    categorical_attributes = []
-    numerical_attributes = []
-    qid_attributes = ['b', 'n', 'q', 'v', 'w', 'x', 'y', 'z']
-    sensitive_attributes = ['d']
-    missing_symbol = '?'
-    for attribute in df.columns:
-        missing_rows = df[df[attribute].astype(str).str.strip() == missing_symbol]
-        df.drop(missing_rows.index, inplace = True)
-    df[qid_attributes] = df[qid_attributes].astype(int)
-    info=get_info()
-    df.to_csv('cleaned_imports.csv')
-    return (df,info)
-
